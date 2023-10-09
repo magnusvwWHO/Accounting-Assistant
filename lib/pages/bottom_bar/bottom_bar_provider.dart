@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../pages_list.dart';
 
 class BottomBarProvider extends ChangeNotifier {
   BottomBarProvider({required this.context});
 
   final BuildContext context;
+  final pages = [list, task];
 
-  int _currentIndex = 0;
-  final pages = <String>["/list", "/task"];
-
-  get currentIndex {
-    return _currentIndex;
-  }
-
-  set currentIndex(dynamic value) {
-    _currentIndex = value;
-  }
+  int currentIndex = 0;
 
   dynamic onTap(int index) {
-    _currentIndex = index;
-    GoRouter.of(context).go(pages[_currentIndex]);
+    currentIndex = index;
+    GoRouter.of(context).go(pages[currentIndex]);
     notifyListeners();
   }
 }

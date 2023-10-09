@@ -10,33 +10,29 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => BottomBarProvider(context: context),
-      builder: (context, child) => Consumer<BottomBarProvider>(
-        builder: (context, provider, child) => Scaffold(
-          body: child,
-          bottomNavigationBar: SalomonBottomBar(
-            backgroundColor: Colors.blue.shade50,
-            currentIndex: provider.currentIndex,
-            onTap: provider.onTap,
-            items: [
-              SalomonBottomBarItem(
-                icon: const Icon(
-                  Icons.list_alt,
-                  size: 30,
-                ),
-                title: const Text("Days"),
-              ),
-              SalomonBottomBarItem(
-                icon: const Icon(
-                  Icons.library_add_check,
-                  size: 30,
-                ),
-                title: const Text("Tasks"),
-              ),
-            ],
+    final provider = context.read<BottomBarProvider>();
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: SalomonBottomBar(
+        backgroundColor: Colors.blue.shade50,
+        currentIndex: provider.currentIndex,
+        onTap: provider.onTap,
+        items: [
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.list_alt,
+              size: 30,
+            ),
+            title: const Text("Days"),
           ),
-        ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.library_add_check,
+              size: 30,
+            ),
+            title: const Text("Tasks"),
+          ),
+        ],
       ),
     );
   }
