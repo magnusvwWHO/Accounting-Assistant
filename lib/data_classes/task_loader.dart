@@ -20,7 +20,5 @@ abstract class TaskLoader {
     return false;
   }
 
-  static void uploadTasks() async {
-    //TODO implement uploading
-  }
+  static void uploadTasks() async {}
 }

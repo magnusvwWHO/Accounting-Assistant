@@ -15,8 +15,7 @@ class ListPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         itemCount: provider.tasks.length,
         itemBuilder: (context, index) => TextButton(
-          onPressed:() => ,
-          child: Text(''),
+          onPressed: ,
         ),
       ),
     );
