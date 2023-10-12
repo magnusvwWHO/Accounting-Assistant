@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../pages_list.dart';
+import '../../router/pages_list.dart';
 
 class BottomBarProvider extends ChangeNotifier {
   BottomBarProvider({required this.context});
