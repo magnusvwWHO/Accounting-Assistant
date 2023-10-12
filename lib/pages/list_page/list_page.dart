@@ -13,7 +13,7 @@ class ListPage extends StatelessWidget {
         body: Consumer<ListPageProvider>(
           builder: (context, provider, child) => ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: provider.length(),
+            itemCount: 5 /* HARDCODE */,
             itemBuilder: (context, index) => Container(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: const Column(
