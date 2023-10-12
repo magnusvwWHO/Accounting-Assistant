@@ -7,22 +7,25 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ListPageProvider>();
+
     return ChangeNotifierProvider(
       create: (context) => ListPageProvider(context: context),
-      builder: (context, child) => Scaffold(
-        body: Consumer<ListPageProvider>(
-          builder: (context, provider, child) => ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: 5 /* HARDCODE */,
-            itemBuilder: (context, index) => Container(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-              ),
-            ),
-          ),
-        ),
-      ),
+      builder: (context, child) => Scaffold(),
+      // builder: (context, child) => Scaffold(
+      //   body: Consumer<ListPageProvider>(
+      //     builder: (context, provider, child) => ListView.builder(
+      //       padding: const EdgeInsets.all(16),
+      //       itemCount: 5 /* HARDCODE */,
+      //       itemBuilder: (context, index) => const Padding(
+      //         padding: EdgeInsets.symmetric(vertical: 10.0),
+      //         child: Column(
+      //           mainAxisAlignment: MainAxisAlignment.start,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

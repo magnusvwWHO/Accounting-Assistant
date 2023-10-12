@@ -1,5 +1,6 @@
 import 'package:accounting_assistant/pages/bottom_bar/bottom_bar_provider.dart';
 import 'package:accounting_assistant/pages/list_page/list_page.dart';
+import 'package:accounting_assistant/pages/list_page/list_page_provider.dart';
 import 'package:accounting_assistant/pages/task_page/task_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,10 @@ final router = GoRouter(
         GoRoute(
           name: 'list',
           path: '/list',
-          builder: (context, state) => const ListPage(),
+          builder: (context, state) => ChangeNotifierProvider(
+            create: (context) => ListPageProvider(context: context),
+            builder: (context, child) => ListPage(),
+          ),
         ),
         GoRoute(
           name: 'task',
