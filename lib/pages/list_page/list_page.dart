@@ -11,21 +11,14 @@ class ListPage extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (context) => ListPageProvider(context: context),
-      builder: (context, child) => Scaffold(),
-      // builder: (context, child) => Scaffold(
-      //   body: Consumer<ListPageProvider>(
-      //     builder: (context, provider, child) => ListView.builder(
-      //       padding: const EdgeInsets.all(16),
-      //       itemCount: 5 /* HARDCODE */,
-      //       itemBuilder: (context, index) => const Padding(
-      //         padding: EdgeInsets.symmetric(vertical: 10.0),
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.start,
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      builder: (context, child) => ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        itemCount: provider.tasks.length,
+        itemBuilder: (context, index) => TextButton(
+          onPressed:() => ,
+          child: Text(''),
+        ),
+      ),
     );
   }
 }

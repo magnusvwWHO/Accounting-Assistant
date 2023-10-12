@@ -7,6 +7,6 @@ class Task {
 
   String title;
   String description;
-  DateTime date;
+  String date;
   bool isDone;
 }
