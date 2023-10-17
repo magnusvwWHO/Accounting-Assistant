@@ -12,6 +12,9 @@
 .history
 .svn/
 
+#Firebase related
+.firebase
+
 # IntelliJ related
 *.iml
 *.ipr
