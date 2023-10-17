@@ -1,5 +1,6 @@
-import 'package:accounting_assistant/data_classes/task.dart';
+import 'package:accounting_assistant/data_classes/active_task.dart';
 
-class CurrentTasks {
-  List<Task> currentTasks = [];
+// Таски для правой страницы (task_page)
+abstract class CurrentTasks {
+  List<ActiveTask> currentTasks = [];
 }

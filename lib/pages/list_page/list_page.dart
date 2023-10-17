@@ -9,13 +9,17 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<ListPageProvider>();
 
-    return ChangeNotifierProvider(
-      create: (context) => ListPageProvider(context: context),
-      builder: (context, child) => ListView.builder(
+    return Scaffold(
+      body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         itemCount: provider.tasks.length,
         itemBuilder: (context, index) => TextButton(
-          onPressed: ,
+          onPressed:
+              () {}, // TODO: Implement alert widget contains title, descrition of tasks[index]
+          child: Text(
+            provider.tasks[index].day,
+            style: const TextStyle(fontSize: 24.0),
+          ),
         ),
       ),
     );

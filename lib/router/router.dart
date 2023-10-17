@@ -2,6 +2,7 @@ import 'package:accounting_assistant/pages/bottom_bar/bottom_bar_provider.dart';
 import 'package:accounting_assistant/pages/list_page/list_page.dart';
 import 'package:accounting_assistant/pages/list_page/list_page_provider.dart';
 import 'package:accounting_assistant/pages/task_page/task_page.dart';
+import 'package:accounting_assistant/pages/task_page/task_page_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,26 +17,25 @@ final router = GoRouter(
   routes: [
     ShellRoute(
       navigatorKey: _shellNavigationKey,
-      builder: (context, state, child) => ChangeNotifierProvider(
-        create: (context) => BottomBarProvider(context: context),
-        builder: (context, child) => BottomBar(child: child),
-      ),
-      // builder: (context, state, child) => BottomBar(
-      //   child: child,
+      // builder: (context, state, child) => ChangeNotifierProvider(
+      //   create: (context) => BottomBarProvider(context: context),
+      //   builder: (context, child) => BottomBar(child: child),
       // ),
+      builder: (context, state, child) => BottomBar(child: child),
       routes: [
         GoRoute(
-          name: 'list',
           path: '/list',
           builder: (context, state) => ChangeNotifierProvider(
             create: (context) => ListPageProvider(context: context),
-            builder: (context, child) => ListPage(),
+            builder: (context, child) => const ListPage(),
           ),
         ),
         GoRoute(
-          name: 'task',
           path: '/task',
-          builder: (context, state) => const TaskPage(),
+          builder: (context, state) => ChangeNotifierProvider(
+            create: (context) => TaskPageProvider(context: context),
+            builder: (context, child) => const TaskPage(),
+          ),
         ),
       ],
     ),
