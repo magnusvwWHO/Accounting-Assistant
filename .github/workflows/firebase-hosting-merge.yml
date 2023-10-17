@@ -11,6 +11,8 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+        run: flutter pug get
+        run: flutter config --enable-web
       - uses: actions/checkout@v3
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
