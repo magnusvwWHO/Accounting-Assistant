@@ -22,3 +22,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SCHOOL_ACCOUNTING_ASSISTANT }}'
           channelId: live
           projectId: school-accounting-assistant
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
