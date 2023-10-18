@@ -1,11 +1,14 @@
 import 'package:accounting_assistant/data_classes/active_task.dart';
 
 // Таски для правой страницы (task_page)
-class CurrentTasks {
-  //HARDCODE
-  static List<ActiveTask> currentTasks = [
-    ActiveTask(title: 'First', description: 'First test active task'),
-    ActiveTask(title: 'Second', description: 'Second test active task'),
-    ActiveTask(title: 'Third', description: 'Third test active task'),
-  ];
+class ActiveTasks {
+  static final List<ActiveTask> activeTasks = [];
+
+  ActiveTasks.fromJson(Map<String, dynamic> json) {
+    json['tasks'].forEach((iterator) {
+      final name = iterator['name'] as String;
+      final description = iterator['description'] as String;
+      activeTasks.add(ActiveTask(title: name, description: description));
+    });
+  }
 }

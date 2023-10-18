@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'task_page_provider.dart';
 import 'package:provider/provider.dart';
+import '../../data_classes/task_loader.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TaskLoader.downloadTasks();
     final provider = context.watch<TaskPageProvider>();
 
     return Scaffold(
@@ -21,6 +23,11 @@ class TaskPage extends StatelessWidget {
           value: provider.tasks[index].isDone,
           onChanged: (value) => provider.changed(index),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.lightBlue,
+        child: const Icon(Icons.save),
+        onPressed: () {},
       ),
     );
   }

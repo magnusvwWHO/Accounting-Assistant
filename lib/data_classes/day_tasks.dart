@@ -4,7 +4,5 @@ import 'day_task.dart';
 abstract class Days {
   static List<Day> days = [];
 
-  static void loadFromJson(Map<String, dynamic> data) {
-    
-  }
+  static void loadFromJson(Map<String, dynamic> data) {}
 }

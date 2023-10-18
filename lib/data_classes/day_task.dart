@@ -4,4 +4,6 @@ import 'active_task.dart';
 class Day {
   List<ActiveTask> doneTasks = [];
   String day = "";
+
+  Day({required this.day});
 }

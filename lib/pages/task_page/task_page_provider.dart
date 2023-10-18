@@ -5,10 +5,12 @@ class TaskPageProvider extends ChangeNotifier {
   TaskPageProvider({required this.context});
 
   BuildContext context;
-  var tasks = CurrentTasks.currentTasks;
+  var tasks = ActiveTasks.activeTasks;
 
   void changed(int index) {
     tasks[index].isDone = !tasks[index].isDone;
     notifyListeners();
   }
+
+  void pressed() {}
 }
