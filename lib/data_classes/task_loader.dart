@@ -6,7 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
   static void downloadTasks() async {
-    final storageRef = FirebaseStorage.instance.ref();
+    final storageRef = FirebaseStorage.instance
+        .ref('gs://school-accounting-assistant.appspot.com');
     final completedTasksReference = storageRef.child("tasks/completed.json");
     final activeTasksReference = storageRef.child("tasks/active.json");
 
