@@ -1,3 +1,4 @@
+import 'package:accounting_assistant/data_classes/task_loader.dart';
 import 'package:accounting_assistant/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -7,6 +8,7 @@ import 'router/router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  TaskLoader.downloadTasks();
   runApp(const App());
 }
 

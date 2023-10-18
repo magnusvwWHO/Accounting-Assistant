@@ -1,0 +1,8 @@
+[
+    {
+        "origin": ["https://school-accounting-assistant.web.app"],
+        "responseHeader": ["Authorization", "Content-Range", "Accept", "Content-Type", "Origin", "Range"],
+        "maxAgeSeconds": 3600,
+        "method": ["GET"]
+    }
+]
