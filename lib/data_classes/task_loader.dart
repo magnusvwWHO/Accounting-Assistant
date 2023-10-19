@@ -5,6 +5,10 @@ import 'package:accounting_assistant/data_classes/active_tasks.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
+  static void initialize() {
+    downloadTasks();
+  }
+
   static void downloadTasks() async {
     final storageRef = FirebaseStorage.instance.ref();
     final activeTasksReference = storageRef.child("tasks/active.json");

@@ -5,7 +5,7 @@ class ListPageProvider extends ChangeNotifier {
   ListPageProvider({required this.context});
 
   BuildContext context;
-  final tasks = Days.days;
+  final tasks = Days.doneDays;
 
   void onPressed() {}
 }

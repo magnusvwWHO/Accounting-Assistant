@@ -8,7 +8,7 @@ import 'router/router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  TaskLoader.downloadTasks();
+  TaskLoader.initialize();
   runApp(const App());
 }
 
