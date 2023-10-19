@@ -27,6 +27,7 @@ class TaskPage extends StatelessWidget {
         child: const Icon(Icons.save),
         onPressed: () {},
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -6,17 +6,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
   static void downloadTasks() async {
-    final storageRef = FirebaseStorage.instance.refFromURL(
-        'gs://school-accounting-assistant.appspot.com/tasks/active.json');
-    //final completedTasksReference = storageRef.child("tasks/completed.json");
-    //final activeTasksReference = storageRef.child("tasks").child("active.json");
+    final storageRef = FirebaseStorage.instance.ref();
+    final completedTasksReference = storageRef.child("tasks/completed.json");
+    final activeTasksReference = storageRef.child("tasks/active.json");
 
     //TODO Убрать закачку тасков из main в более подходящее место
     //TODO Исправить архитектуру запросов
 
     try {
       const oneMB = 1024 * 1024;
-      final Uint8List? activeRaw = await storageRef.getData(10 * oneMB);
+      final Uint8List? activeRaw =
+          await activeTasksReference.getData(10 * oneMB);
       if (activeRaw != null) {
         String activeJson = String.fromCharCodes(activeRaw);
         Map<String, dynamic> activeMapped = jsonDecode(activeJson);
