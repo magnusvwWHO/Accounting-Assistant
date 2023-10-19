@@ -6,7 +6,7 @@ import 'day_task.dart';
 abstract class Days {
   static List<Day> doneDays = [];
 
-  Days.fromJson(Map<String, dynamic> json) {
+  static void fromJson(Map<String, dynamic> json) {
     final days = <DateTime, Day>{};
     json['tasks'].forEach((iterator) {
       final name = iterator['name'] as String;
