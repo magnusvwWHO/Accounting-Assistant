@@ -17,7 +17,7 @@ class ListPage extends StatelessWidget {
           onPressed:
               () {}, // TODO: Implement alert widget contains title, descrition of tasks[index]
           child: Text(
-            provider.tasks[index].day,
+            provider.tasks[index].day.toString(),
             style: const TextStyle(fontSize: 24.0),
           ),
         ),

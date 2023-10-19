@@ -7,8 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 abstract class TaskLoader {
   static void downloadTasks() async {
     final storageRef = FirebaseStorage.instance.ref();
-    final completedTasksReference = storageRef.child("tasks/completed.json");
     final activeTasksReference = storageRef.child("tasks/active.json");
+    final completedTasksReference = storageRef.child("tasks/done.json");
 
     //TODO Убрать закачку тасков из main в более подходящее место
     //TODO Исправить архитектуру запросов
