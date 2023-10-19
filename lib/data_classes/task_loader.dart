@@ -2,19 +2,21 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:accounting_assistant/data_classes/active_tasks.dart';
+import 'package:accounting_assistant/data_classes/day_tasks.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
+  static void initialize() {
+    downloadTasks();
+  }
+
   static void downloadTasks() async {
     final storageRef = FirebaseStorage.instance.ref();
-    final completedTasksReference = storageRef.child("tasks/completed.json");
     final activeTasksReference = storageRef.child("tasks/active.json");
+    final completedTasksReference = storageRef.child("tasks/done.json");
 
-    //TODO Убрать закачку тасков из main в более подходящее место
-    //TODO Исправить архитектуру запросов
-
+    const oneMB = 1024 * 1024;
     try {
-      const oneMB = 1024 * 1024;
       final Uint8List? activeRaw =
           await activeTasksReference.getData(10 * oneMB);
       if (activeRaw != null) {
@@ -23,13 +25,18 @@ abstract class TaskLoader {
         ActiveTasks.fromJson(activeMapped);
       }
     } on FirebaseException catch (e) {
-      rethrow;
       //TODO Imlement exception notification
     }
-    // try {
-    //   final Uint8List? completedRaw = await completedTasksReference.getData();
-    // } on FirebaseException catch (e) {
-    //   //TODO Imlement exception notification
-    // }
+    try {
+      final Uint8List? completedRaw =
+          await completedTasksReference.getData(10 * oneMB);
+      if (completedRaw != null) {
+        String completedJson = String.fromCharCodes(completedRaw);
+        Map<String, dynamic> completedMapped = jsonDecode(completedJson);
+        Days.fromJson(completedMapped);
+      }
+    } on FirebaseException catch (e) {
+      //TODO Imlement exception notification
+    }
   }
 }
