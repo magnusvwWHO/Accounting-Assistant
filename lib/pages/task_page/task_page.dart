@@ -10,6 +10,17 @@ class TaskPage extends StatelessWidget {
     final provider = context.watch<TaskPageProvider>();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Активные задачи',
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            fontSize: 24.0,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.blue.shade50,
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         itemCount: provider.tasks.length,
@@ -23,7 +34,7 @@ class TaskPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).primaryColorDark,
         child: const Icon(Icons.save),
         onPressed: () {},
       ),
