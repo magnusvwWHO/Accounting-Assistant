@@ -17,13 +17,13 @@ final router = GoRouter(
   routes: [
     ShellRoute(
       navigatorKey: _shellNavigationKey,
-      // builder: (context, state, child) => ChangeNotifierProvider(
-      //   create: (context) => BottomBarProvider(context: context),
-      //   builder: (context, child) => BottomBar(child: child),
-      // ),
-      builder: (context, state, child) => BottomBar(child: child),
+      builder: (context, state, pageWidget) => ChangeNotifierProvider(
+        create: (context) => BottomBarProvider(context: context),
+        builder: (context, child) => BottomBar(child: pageWidget),
+      ),
       routes: [
         GoRoute(
+          name: 'list',
           path: '/list',
           builder: (context, state) => ChangeNotifierProvider(
             create: (context) => ListPageProvider(context: context),
@@ -31,6 +31,7 @@ final router = GoRouter(
           ),
         ),
         GoRoute(
+          name: 'task',
           path: '/task',
           builder: (context, state) => ChangeNotifierProvider(
             create: (context) => TaskPageProvider(context: context),

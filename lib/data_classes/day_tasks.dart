@@ -12,12 +12,10 @@ abstract class Days {
       final name = iterator['name'] as String;
       final description = iterator['description'] as String;
       final date = DateTime.parse((iterator['date'] as String));
-      if (!days.containsKey(date)) {
+      if (days.containsKey(date)) {
         days[date] = Day(day: date);
       }
-      days[date]!
-          .doneTasks
-          .add(ActiveTask(title: name, description: description));
+      days[date]!.doneTasks.add(Task(title: name, description: description));
     });
   }
 }
