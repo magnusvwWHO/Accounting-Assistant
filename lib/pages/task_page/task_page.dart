@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'task_page_provider.dart';
 import 'package:provider/provider.dart';
-import '../../data_classes/task_loader.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TaskLoader.downloadTasks();
     final provider = context.watch<TaskPageProvider>();
 
     return Scaffold(
