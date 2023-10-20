@@ -14,7 +14,6 @@ class BottomBar extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: SalomonBottomBar(
-        backgroundColor: Colors.blue.shade50,
         currentIndex: provider.currentIndex,
         onTap: (index) => provider.onTap(index),
         items: [

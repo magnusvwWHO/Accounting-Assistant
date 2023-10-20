@@ -9,7 +9,7 @@ abstract class Days {
   static void fromJson(Map<String, dynamic> json) {
     final days = <DateTime, Day>{};
     json['tasks'].forEach((iterator) {
-      final name = iterator['name'] as String;
+      final name = iterator['title'] as String;
       final description = iterator['description'] as String;
       final date = DateTime.parse((iterator['date'] as String));
       if (days.containsKey(date)) {
