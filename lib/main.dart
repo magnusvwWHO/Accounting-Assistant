@@ -1,7 +1,6 @@
 import 'package:accounting_assistant/data_classes/task_loader.dart';
 import 'package:accounting_assistant/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
 import 'router/router.dart';
 
@@ -20,7 +19,6 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       theme: ThemeData(
-        colorSchemeSeed: Colors.lightBlue,
         useMaterial3: true,
       ),
     );

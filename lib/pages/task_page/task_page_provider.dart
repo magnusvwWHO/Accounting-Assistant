@@ -7,10 +7,15 @@ class TaskPageProvider extends ChangeNotifier {
   BuildContext context;
   var tasks = ActiveTasks.activeTasks;
 
+  void open(
+      int index) {} // TODO: Implement opening dialog widget with title: title of tasks[index] and description
+
   void changed(int index) {
     tasks[index].isDone = !tasks[index].isDone;
     notifyListeners();
   }
 
-  void pressed() {}
+  void save() {}
+
+  void create() {}
 }

@@ -16,29 +16,44 @@ class TaskPage extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w300,
             fontSize: 24.0,
-            color: Colors.black,
           ),
         ),
-        backgroundColor: Colors.blue.shade50,
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        padding: const EdgeInsets.all(5.0),
         itemCount: provider.tasks.length,
-        itemBuilder: (context, index) => CheckboxListTile(
-          title: Text(
-            provider.tasks[index].title,
-            style: const TextStyle(fontSize: 24.0),
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          provider.tasks[index].title,
+                          style: const TextStyle(fontSize: 24.0),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                Checkbox(
+                  value: provider.tasks[index].isDone,
+                  onChanged: (value) => provider.changed(index),
+                ),
+              ],
+            ),
           ),
-          value: provider.tasks[index].isDone,
-          onChanged: (value) => provider.changed(index),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColorDark,
-        child: const Icon(Icons.save),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
