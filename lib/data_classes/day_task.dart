@@ -3,7 +3,7 @@ import 'active_task.dart';
 // Модель тасков для левой страницы (list_page)
 class Day {
   List<Task> doneTasks = [];
-  DateTime day;
+  DateTime date;
 
-  Day({required this.day});
+  Day({required this.date});
 }
