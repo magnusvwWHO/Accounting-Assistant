@@ -1,22 +1,22 @@
 {
     "tasks" : [
         {
-            "date" : "2023-09-20",
+            "date" : "20230920",
             "name" : "Test done task 1",
             "description" : "test description 1"
         },
         {
-            "date" : "2023-09-20",
+            "date" : "20230920",
             "name" : "Test done task 2",
             "description" : "test description 1"
         },
         {
-            "date" : "2023-09-18",
+            "date" : "20230918",
             "name" : "Test done task 3",
             "description" : "test description 1"
         },
         {
-            "date" : "2023-09-15",
+            "date" : "20230915",
             "name" : "Test done task 4",
             "description" : "test description 1"
         }
