@@ -8,14 +8,17 @@ abstract class Days {
 
   static void fromJson(Map<String, dynamic> json) {
     final days = <DateTime, Day>{};
-    json['tasks'].forEach((iterator) {
-      final name = iterator['title'] as String;
-      final description = iterator['description'] as String;
-      final date = DateTime.parse((iterator['date'] as String));
-      if (days.containsKey(date)) {
-        days[date] = Day(day: date);
-      }
-      days[date]!.doneTasks.add(Task(title: name, description: description));
-    });
+    json['tasks'].forEach(
+      (iterator) {
+        final name = iterator['name'] as String;
+        final description = iterator['description'] as String;
+        final date = DateTime.parse((iterator['date'] as String));
+        if (!days.containsKey(date)) {
+          days[date] = Day(date: date);
+        }
+        days[date]!.doneTasks.add(Task(title: name, description: description));
+      },
+    );
+    doneDays.addAll(days.values);
   }
 }
