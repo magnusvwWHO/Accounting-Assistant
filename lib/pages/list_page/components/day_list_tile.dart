@@ -8,10 +8,15 @@ class DayListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          ("${day.date.day.toString()}.${day.date.month.toString()}"),
+          ("${day.date.day}.${day.date.month}.${day.date.year}"),
           textAlign: TextAlign.start,
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         ListView.builder(
           shrinkWrap: true,
@@ -19,11 +24,28 @@ class DayListTile extends StatelessWidget {
           itemCount: day.doneTasks.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () => showTaskAlert(context, index),
-            child: Row(
-              children: [
-                const Icon(Icons.check_circle),
-                Text(day.doneTasks[index].title)
-              ],
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 5.0),
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.blue[50],
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(width: 5),
+                  const Icon(
+                    Icons.check_circle,
+                    size: 30,
+                  ),
+                  Expanded(
+                    child: Text(
+                      day.doneTasks[index].title,
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -36,12 +58,22 @@ class DayListTile extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) => AlertDialog(
-        title: Text(day.date.toString()),
+        title: Text(
+          '${day.date.day}.${day.date.month}.${day.date.year}',
+          style: const TextStyle(fontSize: 30),
+          textAlign: TextAlign.center,
+        ),
         content: SingleChildScrollView(
           child: Column(
             children: [
-              Text(day.doneTasks[index].title),
-              Text(day.doneTasks[index].description),
+              Text(
+                day.doneTasks[index].title,
+                style: const TextStyle(fontSize: 30),
+              ),
+              Text(
+                day.doneTasks[index].description,
+                style: const TextStyle(fontSize: 20),
+              ),
             ],
           ),
         ),

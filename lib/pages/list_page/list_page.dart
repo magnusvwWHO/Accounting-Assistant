@@ -12,11 +12,15 @@ class ListPage extends StatelessWidget {
     final provider = context.watch<ListPageProvider>();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Выполненные задачи"),
+        backgroundColor: Colors.blue[300],
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.all(4.0),
         itemCount: Days.doneDays.length,
         itemBuilder: (context, index) {
-          return DayListTile(day: Days.doneDays[index]);
+          return DayListTile(day: provider.tasks[index]);
         },
       ),
     );
