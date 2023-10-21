@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'task_page_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,12 +12,20 @@ class TaskPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[300],
         title: const Text(
           'Активные задачи',
           style: TextStyle(
             fontWeight: FontWeight.w300,
             fontSize: 24.0,
           ),
+        ),
+        leading: TextButton(
+          child: const Icon(
+            Icons.add,
+            size: 30,
+          ),
+          onPressed: () => showInputAlert(context),
         ),
       ),
       body: ListView.builder(
@@ -53,6 +62,77 @@ class TaskPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Future<dynamic> showInputAlert(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (contextDialog) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(
+              Icons.add_circle,
+              size: 30,
+            ),
+            Text(
+              'Добавить задачу',
+            ),
+          ],
+        ),
+        content: SizedBox(
+          width: 500,
+          height: 500,
+          child: Form(
+            key: context.read<TaskPageProvider>().taskSaveFormKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(hintText: 'Название'),
+                  onSaved: context.read<TaskPageProvider>().saveName,
+                ),
+                TextFormField(
+                  minLines: 1,
+                  maxLines: 8,
+                  decoration: const InputDecoration(hintText: 'Описание'),
+                  onSaved: context.read<TaskPageProvider>().saveDescription,
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue[100],
+                ),
+                onPressed: () => GoRouter.of(context).pop(),
+                child: const Text(
+                  'Отменить',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue[100],
+                ),
+                onPressed: () {
+                  context.read<TaskPageProvider>().addNewTask();
+                  GoRouter.of(context).pop();
+                },
+                child: const Text(
+                  'Сохранить',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
