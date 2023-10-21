@@ -19,8 +19,13 @@ class TaskPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTask(String name, String description) {
+  void addNewTask() {
+    taskSaveFormKey.currentState!.save();
     ActiveTasks.activeTasks.add(Task(title: name, description: description));
     notifyListeners();
   }
+
+  void saveName(String? value) => name = value ?? '';
+
+  void saveDescription(String? value) => description = value ?? '';
 }

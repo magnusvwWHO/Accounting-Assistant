@@ -91,11 +91,13 @@ class TaskPage extends StatelessWidget {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(hintText: 'Название'),
+                  onSaved: context.read<TaskPageProvider>().saveName,
                 ),
                 TextFormField(
                   minLines: 1,
                   maxLines: 8,
                   decoration: const InputDecoration(hintText: 'Описание'),
+                  onSaved: context.read<TaskPageProvider>().saveDescription,
                 ),
               ],
             ),
@@ -119,7 +121,10 @@ class TaskPage extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.blue[100],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.read<TaskPageProvider>().addNewTask();
+                  GoRouter.of(context).pop();
+                },
                 child: const Text(
                   'Сохранить',
                   style: TextStyle(fontSize: 18),
