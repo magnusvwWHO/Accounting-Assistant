@@ -20,6 +20,8 @@ class App extends StatelessWidget {
       routerConfig: router,
       theme: ThemeData(
         useMaterial3: true,
+        colorSchemeSeed: Colors.green.shade50,
+        cardColor: Colors.green.shade100,
       ),
     );
   }

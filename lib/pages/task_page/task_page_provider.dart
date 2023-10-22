@@ -14,6 +14,8 @@ class TaskPageProvider extends ChangeNotifier {
 
   var taskSaveFormKey = GlobalKey<FormState>();
 
+  void save() {}
+
   void changed(int index) {
     tasks[index].isDone = !tasks[index].isDone;
     notifyListeners();
