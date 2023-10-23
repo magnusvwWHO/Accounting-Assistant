@@ -1,30 +1,21 @@
-// import 'package:accounting_assistant/pages/bottom_bar/bottom_bar_provider.dart';
+import 'package:accounting_assistant/pages/bottom_bar/bottom_bar_provider.dart';
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:go_router/go_router.dart';
 
 class BottomBar extends StatelessWidget {
-  BottomBar({super.key, required this.child});
+  const BottomBar({super.key, required this.child});
 
   final Widget? child;
-  static int currentIndex = 0;
-  final pages = ['/list', '/task'];
 
   @override
   Widget build(BuildContext context) {
-    // final provider = context.watch<BottomBarProvider>();
+    final provider = context.watch<BottomBarProvider>();
     return Scaffold(
       body: child,
       bottomNavigationBar: SalomonBottomBar(
-        backgroundColor: Colors.blue.shade50,
-        // currentIndex: provider.currentIndex,
-        // onTap: (index) => provider.onTap(index),
-        currentIndex: currentIndex,
-        onTap: (int index) {
-          currentIndex = index;
-          GoRouter.of(context).go(pages[index]);
-        },
+        currentIndex: provider.currentIndex,
+        onTap: (index) => provider.onTap(index),
         items: [
           SalomonBottomBarItem(
             icon: const Icon(

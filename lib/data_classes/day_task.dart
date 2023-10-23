@@ -2,8 +2,8 @@ import 'active_task.dart';
 
 // Модель тасков для левой страницы (list_page)
 class Day {
-  List<ActiveTask> doneTasks = [];
-  String day = "";
+  List<Task> doneTasks = [];
+  DateTime date;
 
-  Day({required this.day});
+  Day({required this.date});
 }

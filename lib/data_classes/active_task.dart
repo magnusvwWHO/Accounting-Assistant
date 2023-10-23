@@ -1,12 +1,14 @@
 // Модель таск для правой страницы (task_page)
-class ActiveTask {
+class Task {
   String title = "";
   String description = "";
   bool isDone = false;
 
-  ActiveTask({
+  Task({
     required this.title,
     required this.description,
     this.isDone = false,
   });
+
+  Map toJson() => {"name": title, "description": description};
 }
