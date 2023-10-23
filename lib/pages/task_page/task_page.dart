@@ -9,8 +9,8 @@ class TaskPage extends StatelessWidget {
   const TaskPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<TaskPageProvider>();
+  Widget build(BuildContext contextMain) {
+    final provider = contextMain.watch<TaskPageProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +74,7 @@ class TaskPage extends StatelessWidget {
                     ),
                     onPressed: () =>
                         showTaskAlert(context, provider.tasks[index]),
-                    onLongPress: () => showDeleteAlert(context,
+                    onLongPress: () => showDeleteAlert(contextMain,
                         provider.tasks[index]), // TODO: Implement deleting task
                   ),
                 ),
@@ -91,16 +91,16 @@ class TaskPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).cardColor,
-        onPressed: () => showInputAlert(context),
+        backgroundColor: Theme.of(contextMain).cardColor,
+        onPressed: () => showInputAlert(contextMain),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  Future<dynamic> showDeleteAlert(BuildContext context, Task task) {
+  Future<dynamic> showDeleteAlert(BuildContext contextMain, Task task) {
     return showDialog(
-      context: context,
+      context: contextMain,
       barrierDismissible: true,
       builder: (context) => AlertDialog(
         title: Text(
@@ -144,7 +144,10 @@ class TaskPage extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Theme.of(context).cardColor,
                 ),
-                onPressed: () {}, // TODO: Implement deleting task
+                onPressed: () {
+                  contextMain.read<TaskPageProvider>().deleteTask(task);
+                  GoRouter.of(context).pop();
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(

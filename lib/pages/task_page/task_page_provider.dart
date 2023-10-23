@@ -31,6 +31,11 @@ class TaskPageProvider extends ChangeNotifier {
     return false;
   }
 
+  void deleteTask(Task task) {
+    tasks.remove(task);
+    notifyListeners();
+  }
+
   String? validateName(String? value) {
     notifyListeners();
     return value == '' ? 'Название не может быть пустым' : null;
