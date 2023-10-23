@@ -21,10 +21,19 @@ class TaskPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addNewTask() {
-    taskSaveFormKey.currentState!.save();
-    ActiveTasks.activeTasks.add(Task(title: name, description: description));
+  bool addNewTask() {
+    if (taskSaveFormKey.currentState!.validate()) {
+      taskSaveFormKey.currentState!.save();
+      ActiveTasks.activeTasks.add(Task(title: name, description: description));
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
+  String? validateName(String? value) {
     notifyListeners();
+    return value == '' ? 'Название не может быть пустым' : null;
   }
 
   void saveName(String? value) => name = value ?? '';

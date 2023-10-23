@@ -16,7 +16,7 @@ class TaskPage extends StatelessWidget {
         title: const Text(
           'Активные задачи',
           style: TextStyle(
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w800,
             fontSize: 24.0,
           ),
         ),
@@ -231,6 +231,8 @@ class TaskPage extends StatelessWidget {
   }
 
   Future<dynamic> showInputAlert(BuildContext context) {
+    final provider = context.read<TaskPageProvider>();
+
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -252,18 +254,39 @@ class TaskPage extends StatelessWidget {
           width: 500,
           height: 250,
           child: Form(
-            key: context.read<TaskPageProvider>().taskSaveFormKey,
+            key: provider.taskSaveFormKey,
             child: Column(
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(hintText: 'Название'),
-                  onSaved: context.read<TaskPageProvider>().saveName,
+                  decoration: InputDecoration(
+                    hintText: 'Название',
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 0.0, style: BorderStyle.none),
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                    fillColor: Theme.of(context).cardColor,
+                    filled: true,
+                  ),
+                  onSaved: provider.saveName,
+                  validator: (value) => provider.validateName(value),
+                  // TODO: Implement validator
                 ),
+                const SizedBox(height: 10.0),
                 TextFormField(
                   minLines: 1,
                   maxLines: 6,
-                  decoration: const InputDecoration(hintText: 'Описание'),
-                  onSaved: context.read<TaskPageProvider>().saveDescription,
+                  decoration: InputDecoration(
+                    hintText: 'Описание',
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 0.0, style: BorderStyle.none),
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                    fillColor: Theme.of(context).cardColor,
+                    filled: true,
+                  ),
+                  onSaved: provider.saveDescription,
                 ),
               ],
             ),
@@ -295,8 +318,9 @@ class TaskPage extends StatelessWidget {
                   backgroundColor: Theme.of(context).cardColor,
                 ),
                 onPressed: () {
-                  context.read<TaskPageProvider>().addNewTask();
-                  GoRouter.of(context).pop();
+                  if (provider.addNewTask()) {
+                    GoRouter.of(context).pop();
+                  }
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
