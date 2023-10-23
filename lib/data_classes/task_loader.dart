@@ -20,7 +20,7 @@ abstract class TaskLoader {
       final Uint8List? activeRaw =
           await activeTasksReference.getData(10 * oneMB);
       if (activeRaw != null) {
-        String activeJson = String.fromCharCodes(activeRaw);
+        String activeJson = utf8.decode(activeRaw);
         Map<String, dynamic> activeMapped = jsonDecode(activeJson);
         ActiveTasks.fromJson(activeMapped);
       }
@@ -31,7 +31,7 @@ abstract class TaskLoader {
       final Uint8List? completedRaw =
           await completedTasksReference.getData(10 * oneMB);
       if (completedRaw != null) {
-        String completedJson = String.fromCharCodes(completedRaw);
+        String completedJson = utf8.decode(completedRaw);
         Map<String, dynamic> completedMapped = jsonDecode(completedJson);
         Days.fromJson(completedMapped);
       }
@@ -43,12 +43,21 @@ abstract class TaskLoader {
   static void uploadTasks() async {
     final storageRef = FirebaseStorage.instance.ref();
 
-    String tasksJson = '''{tasks: "test" }''';
     try {
-      await storageRef.child('tasks').putString(tasksJson,
-          format: PutStringFormat.base64,
-          metadata: SettableMetadata(contentType: "application/json"));
-    } catch (e) {
+      await storageRef.child('tasks/active.json').putString(
+          jsonEncode(ActiveTasks.toJson()),
+          format: PutStringFormat.raw,
+          metadata: SettableMetadata(contentType: 'application/json'));
+    } on FirebaseException catch (e) {
+      //TODO Imlement exception notification
+    }
+
+    try {
+      await storageRef.child('tasks/done.json').putString(
+          jsonEncode(Days.toJson()),
+          format: PutStringFormat.raw,
+          metadata: SettableMetadata(contentType: 'application/json'));
+    } on FirebaseException catch (e) {
       //TODO Imlement exception notification
     }
   }

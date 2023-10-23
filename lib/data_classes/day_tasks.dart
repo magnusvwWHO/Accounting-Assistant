@@ -21,4 +21,28 @@ abstract class Days {
     );
     doneDays.addAll(days.values);
   }
+
+  static Map toJson() {
+    List<_DoneTask> tasksEncodeFormat = [];
+    for (var day in doneDays) {
+      for (var task in day.doneTasks) {
+        tasksEncodeFormat.add(_DoneTask(task: task, date: day.date));
+      }
+    }
+    return {"tasks": tasksEncodeFormat};
+  }
+}
+
+class _DoneTask {
+  _DoneTask({required this.task, required this.date});
+
+  Task task;
+  DateTime date;
+
+  Map toJson() => {
+        "date":
+            '${date.year}${date.month >= 10 ? date.month : '0${date.month}'}${date.day >= 10 ? date.day : '0${date.day}'}',
+        "name": task.title,
+        "description": task.description,
+      };
 }

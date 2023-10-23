@@ -9,4 +9,6 @@ class Task {
     required this.description,
     this.isDone = false,
   });
+
+  Map toJson() => {"name": title, "description": description};
 }

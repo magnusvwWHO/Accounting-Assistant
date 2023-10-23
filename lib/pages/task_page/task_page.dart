@@ -1,4 +1,5 @@
 import 'package:accounting_assistant/data_classes/active_task.dart';
+import 'package:accounting_assistant/data_classes/task_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'task_page_provider.dart';
@@ -27,7 +28,8 @@ class TaskPage extends StatelessWidget {
               Icons.save,
               size: 30,
             ),
-            onPressed: () {}, // TODO: Implement uploading tasks
+            onPressed:
+                TaskLoader.uploadTasks, // TODO: Implement uploading tasks
           ),
         ),
       ),

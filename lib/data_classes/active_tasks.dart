@@ -11,4 +11,8 @@ abstract class ActiveTasks {
       activeTasks.add(Task(title: name, description: description));
     });
   }
+
+  static Map toJson() {
+    return {"tasks": activeTasks};
+  }
 }
