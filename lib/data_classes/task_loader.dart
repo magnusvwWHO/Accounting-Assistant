@@ -39,4 +39,17 @@ abstract class TaskLoader {
       //TODO Imlement exception notification
     }
   }
+
+  static void uploadTasks() async {
+    final storageRef = FirebaseStorage.instance.ref();
+
+    String tasksJson = '''{tasks: "test" }''';
+    try {
+      await storageRef.child('tasks').putString(tasksJson,
+          format: PutStringFormat.base64,
+          metadata: SettableMetadata(contentType: "application/json"));
+    } catch (e) {
+      //TODO Imlement exception notification
+    }
+  }
 }
