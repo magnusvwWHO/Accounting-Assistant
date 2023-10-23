@@ -13,8 +13,23 @@ class ListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Выполненные задачи"),
-        backgroundColor: Colors.blue[300],
+        title: const Text(
+          'Выполненные задачи',
+          style: TextStyle(
+            fontWeight: FontWeight.w800,
+            fontSize: 24.0,
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 2.0),
+          child: TextButton(
+            onPressed: () {},
+            child: const Icon(
+              Icons.update_rounded,
+              size: 30.0,
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(4.0),
