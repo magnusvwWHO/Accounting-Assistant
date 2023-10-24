@@ -14,11 +14,25 @@ class TaskPageProvider extends ChangeNotifier {
 
   var taskSaveFormKey = GlobalKey<FormState>();
 
-  void save() {}
-
   void changed(int index) {
     tasks[index].isDone = !tasks[index].isDone;
     notifyListeners();
+  }
+
+  bool editTask(String oldTitle, String oldDescription) {
+    if (taskSaveFormKey.currentState!.validate()) {
+      taskSaveFormKey.currentState!.save();
+      Task task = ActiveTasks.activeTasks
+          .where((element) =>
+              (element.title == oldTitle) &&
+              (element.description == oldDescription))
+          .single;
+      task.title = name;
+      task.description = description;
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 
   bool addNewTask() {

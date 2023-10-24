@@ -21,15 +21,15 @@ class TaskPage extends StatelessWidget {
             fontSize: 24.0,
           ),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 2.0),
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 2.0),
           child: TextButton(
-            child: const Icon(
+            onPressed:
+                TaskLoader.uploadTasks, // TODO: Implement uploading tasks
+            child: Icon(
               Icons.save,
               size: 30,
             ),
-            onPressed:
-                TaskLoader.uploadTasks, // TODO: Implement uploading tasks
           ),
         ),
       ),
@@ -74,8 +74,8 @@ class TaskPage extends StatelessWidget {
                     ),
                     onPressed: () =>
                         showTaskAlert(context, provider.tasks[index]),
-                    onLongPress: () => showDeleteAlert(contextMain,
-                        provider.tasks[index]), // TODO: Implement deleting task
+                    onLongPress: () =>
+                        showDeleteAlert(contextMain, provider.tasks[index]),
                   ),
                 ),
                 Padding(
@@ -167,9 +167,9 @@ class TaskPage extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showTaskAlert(BuildContext context, Task task) {
+  Future<dynamic> showTaskAlert(BuildContext contextMain, Task task) {
     return showDialog(
-      context: context,
+      context: contextMain,
       barrierDismissible: true,
       builder: (context) => AlertDialog(
         title: Text(
@@ -198,7 +198,10 @@ class TaskPage extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Theme.of(context).cardColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                  showEditAlert(contextMain, task);
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -220,6 +223,109 @@ class TaskPage extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'ОК',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<dynamic> showEditAlert(BuildContext context, Task task) {
+    final provider = context.read<TaskPageProvider>();
+    final oldTitle = task.title;
+    final oldDesc = task.description;
+
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (contextDialog) => AlertDialog(
+        title: const Text(
+          'Изменение',
+          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+        ),
+        content: SizedBox(
+          width: 500,
+          height: 250,
+          child: Form(
+            key: provider.taskSaveFormKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 0.0, style: BorderStyle.none),
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                    fillColor: Theme.of(context).cardColor,
+                    filled: true,
+                  ),
+                  initialValue: oldTitle,
+                  onSaved: provider.saveName,
+                  validator: (value) => provider.validateName(value),
+                ),
+                const SizedBox(height: 10.0),
+                TextFormField(
+                  minLines: 1,
+                  maxLines: 6,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 0.0, style: BorderStyle.none),
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                    fillColor: Theme.of(context).cardColor,
+                    filled: true,
+                  ),
+                  initialValue: oldDesc,
+                  onSaved: provider.saveDescription,
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).cardColor,
+                ),
+                onPressed: () => GoRouter.of(context).pop(),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Отмена',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).cardColor,
+                ),
+                onPressed: () {
+                  if (provider.editTask(oldTitle, oldDesc)) {
+                    GoRouter.of(context).pop();
+                  }
+                }, // TODO: Implement saving changes
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Сохранить',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
