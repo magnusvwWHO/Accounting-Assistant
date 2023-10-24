@@ -17,6 +17,8 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   firebase_storage: ^11.2.8
   firebase_core: ^2.18.0
+  loading_animation_widget: ^1.2.0+4
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
