@@ -260,7 +260,6 @@ class TaskPage extends StatelessWidget {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: task.title,
                     border: OutlineInputBorder(
                       borderSide:
                           const BorderSide(width: 0.0, style: BorderStyle.none),
@@ -269,6 +268,7 @@ class TaskPage extends StatelessWidget {
                     fillColor: Theme.of(context).cardColor,
                     filled: true,
                   ),
+                  initialValue: oldTitle,
                   onSaved: provider.saveName,
                   validator: (value) => provider.validateName(value),
                 ),
@@ -277,7 +277,6 @@ class TaskPage extends StatelessWidget {
                   minLines: 1,
                   maxLines: 6,
                   decoration: InputDecoration(
-                    hintText: task.description,
                     border: OutlineInputBorder(
                       borderSide:
                           const BorderSide(width: 0.0, style: BorderStyle.none),
@@ -286,6 +285,7 @@ class TaskPage extends StatelessWidget {
                     fillColor: Theme.of(context).cardColor,
                     filled: true,
                   ),
+                  initialValue: oldDesc,
                   onSaved: provider.saveDescription,
                 ),
               ],
