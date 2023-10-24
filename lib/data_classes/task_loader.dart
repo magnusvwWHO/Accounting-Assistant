@@ -6,13 +6,11 @@ import 'package:accounting_assistant/data_classes/day_tasks.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
-  static bool initialize() {
-    bool result = false;
-    downloadTasks().then((value) => result = value);
-    return result;
+  static Future<String?> initialize() async {
+    return await downloadTasks();
   }
 
-  static Future<bool> downloadTasks() async {
+  static Future<String?> downloadTasks() async {
     final storageRef = FirebaseStorage.instance.ref();
     final activeTasksReference = storageRef.child("tasks/active.json");
     final completedTasksReference = storageRef.child("tasks/done.json");
@@ -27,8 +25,7 @@ abstract class TaskLoader {
         ActiveTasks.fromJson(activeMapped);
       }
     } on FirebaseException catch (e) {
-      //TODO Imlement exception notification
-      return false;
+      return e.message;
     }
     try {
       final Uint8List? completedRaw =
@@ -39,10 +36,9 @@ abstract class TaskLoader {
         Days.fromJson(completedMapped);
       }
     } on FirebaseException catch (e) {
-      //TODO Imlement exception notification
-      return false;
+      return e.message;
     }
-    return true;
+    return '';
   }
 
   static void uploadTasks() async {
