@@ -9,7 +9,14 @@ class BottomBarProvider extends ChangeNotifier {
   final StatefulNavigationShell navigationShell;
   final pages = [list, task];
 
-  int currentIndex = 1;
+  int currentIndex = 0;
+
+  // int calculateIndex() {
+  //   final currentPage = GoRouterState.of(context).matchedLocation;
+  //   if (currentPage == list) return 0;
+  //   if (currentPage == task) return 1;
+  //   return 0;
+  // }
 
   dynamic onTap(int index) {
     currentIndex = index;
