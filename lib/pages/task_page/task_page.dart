@@ -21,15 +21,15 @@ class TaskPage extends StatelessWidget {
             fontSize: 24.0,
           ),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 2.0),
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 2.0),
           child: TextButton(
-            child: const Icon(
+            onPressed:
+                TaskLoader.uploadTasks, // TODO: Implement uploading tasks
+            child: Icon(
               Icons.save,
               size: 30,
             ),
-            onPressed:
-                TaskLoader.uploadTasks, // TODO: Implement uploading tasks
           ),
         ),
       ),
@@ -74,8 +74,8 @@ class TaskPage extends StatelessWidget {
                     ),
                     onPressed: () =>
                         showTaskAlert(context, provider.tasks[index]),
-                    onLongPress: () => showDeleteAlert(contextMain,
-                        provider.tasks[index]), // TODO: Implement deleting task
+                    onLongPress: () =>
+                        showDeleteAlert(contextMain, provider.tasks[index]),
                   ),
                 ),
                 Padding(
