@@ -10,34 +10,52 @@ import '../pages/bottom_bar/bottom_bar.dart';
 
 final _rootNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final _shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
+final _shellNavigatorListKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shellList');
+final _shellNavigatorTaskKey =
+    GlobalKey<NavigatorState>(debugLabel: 'taskList');
 
 final router = GoRouter(
   navigatorKey: _rootNavigationKey,
   initialLocation: "/list",
   routes: [
-    ShellRoute(
-      navigatorKey: _shellNavigationKey,
-      builder: (context, state, pageWidget) => ChangeNotifierProvider(
-        create: (context) => BottomBarProvider(context: context),
-        builder: (context, child) => BottomBar(child: pageWidget),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) => ChangeNotifierProvider(
+        create: (context) => BottomBarProvider(
+            context: context, navigationShell: navigationShell),
+        builder: (context, child) => BottomBar(child: navigationShell),
       ),
-      routes: [
-        GoRoute(
-          name: 'list',
-          path: '/list',
-          builder: (context, state) => ChangeNotifierProvider(
-            create: (context) => ListPageProvider(context: context),
-            builder: (context, child) => const ListPage(),
-          ),
+      branches: [
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorListKey,
+          routes: [
+            GoRoute(
+              name: 'list',
+              path: '/list',
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: ChangeNotifierProvider(
+                  create: (context) => ListPageProvider(context: context),
+                  builder: (context, child) => const ListPage(),
+                ),
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          name: 'task',
-          path: '/task',
-          builder: (context, state) => ChangeNotifierProvider(
-            create: (context) => TaskPageProvider(context: context),
-            builder: (context, child) => const TaskPage(),
-          ),
-        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorTaskKey,
+          routes: [
+            GoRoute(
+              name: 'task',
+              path: '/task',
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: ChangeNotifierProvider(
+                  create: (context) => TaskPageProvider(context: context),
+                  builder: (context, child) => const TaskPage(),
+                ),
+              ),
+            ),
+          ],
+        )
       ],
     ),
   ],
