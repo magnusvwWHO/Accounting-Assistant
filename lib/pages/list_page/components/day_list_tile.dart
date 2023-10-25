@@ -1,13 +1,15 @@
 import 'package:accounting_assistant/data_classes/day_task.dart';
+import 'package:accounting_assistant/pages/list_page/list_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class DayListTile extends StatelessWidget {
   const DayListTile({super.key, required this.day});
   final Day day;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextMain) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -16,7 +18,7 @@ class DayListTile extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(13),
-              color: Theme.of(context).cardColor,
+              color: Theme.of(contextMain).cardColor,
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
@@ -48,7 +50,8 @@ class DayListTile extends StatelessWidget {
                       Expanded(
                         child: TextButton(
                           onPressed: () => showTaskAlert(context, index),
-                          onLongPress: () => showDeleteAlert(context, index),
+                          onLongPress: () =>
+                              showDeleteAlert(contextMain, index),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: Align(
@@ -135,9 +138,9 @@ class DayListTile extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showDeleteAlert(BuildContext context, int index) {
+  Future<dynamic> showDeleteAlert(BuildContext contextMain, int index) {
     return showDialog(
-      context: context,
+      context: contextMain,
       barrierDismissible: true,
       builder: (context) => AlertDialog(
         title: Text(
@@ -181,7 +184,10 @@ class DayListTile extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Theme.of(context).cardColor,
                 ),
-                onPressed: () {}, // TODO: Implement deleting task
+                onPressed: () {
+                  contextMain.read<ListPageProvider>().deleteTask(day, index);
+                  GoRouter.of(context).pop();
+                }, // TODO: Implement deleting task
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
