@@ -10,9 +10,13 @@
       {
         "source": "**",
         "destination": "/index.html"
-      },],
+      }
+    ],
     "frameworksBackend": {
       "region": "europe-west1"
     }
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
