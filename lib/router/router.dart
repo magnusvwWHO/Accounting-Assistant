@@ -23,9 +23,11 @@ final router = GoRouter(
     GoRoute(
       name: 'loading',
       path: '/loading',
-      builder: (context, state) => ChangeNotifierProvider(
-          create: (context) => LoadingPageProvider(context: context),
-          builder: (context, child) => const LoadingPage()),
+      pageBuilder: (context, state) => NoTransitionPage(
+        child: ChangeNotifierProvider(
+            create: (context) => LoadingPageProvider(context: context),
+            builder: (context, child) => const LoadingPage()),
+      ),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ChangeNotifierProvider(
