@@ -1,11 +1,11 @@
 import 'package:school_accounting_assistant/data/entity/task.dart';
 
-class DoneTask extends Task {
-  DoneTask({
+class ActiveTask extends Task {
+  ActiveTask({
     required super.title,
     required super.description,
-    this.date,
+    this.isDone = false,
   });
 
-  DateTime? date;
+  bool isDone;
 }
