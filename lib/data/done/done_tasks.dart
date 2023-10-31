@@ -8,5 +8,14 @@ class DoneTasks {
     return {};
   }
 
-  void fromJson()
+  void fromJson(Map<String, dynamic> json) {
+    //TODO Implement JSON decoding
+  }
+
+  DoneTasks._privateConstructor();
+  static final DoneTasks _instance = DoneTasks._privateConstructor();
+
+  factory DoneTasks() {
+    return _instance;
+  }
 }

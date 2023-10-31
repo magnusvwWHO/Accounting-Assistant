@@ -8,4 +8,9 @@ class ActiveTask extends Task {
   });
 
   bool isDone;
+
+  Map<String, dynamic> toJson() {
+    return {};
+    //TODO Implement JSON encoding
+  }
 }

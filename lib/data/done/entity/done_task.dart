@@ -8,4 +8,9 @@ class DoneTask extends Task {
   });
 
   DateTime? date;
+
+  Map<String, dynamic> toJson() {
+    return {};
+    //TODO Implement JSON encoding
+  }
 }

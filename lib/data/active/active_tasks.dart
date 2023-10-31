@@ -11,4 +11,11 @@ class ActiveTasks {
   void fromJson(Map<String, dynamic> json) {
     //TODO Implement JSON decoding
   }
+
+  ActiveTasks._privateConstructor();
+  static final ActiveTasks _instance = ActiveTasks._privateConstructor();
+
+  factory ActiveTasks() {
+    return _instance;
+  }
 }
