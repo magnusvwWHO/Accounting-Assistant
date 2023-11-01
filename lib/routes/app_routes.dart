@@ -15,6 +15,7 @@ final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final _shellKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 final router = GoRouter(
+  initialLocation: Routes.done,
   navigatorKey: _rootKey,
   routes: [
     /// Страница загрузки
@@ -33,26 +34,29 @@ final router = GoRouter(
       navigatorKey: _shellKey,
       builder: (context, state, child) => ChangeNotifierProvider(
         create: (context) => BottomBarProvider(context: context),
-        builder: (context, child) => const BottomBar(),
+        child: BottomBar(child: child),
       ),
       routes: [
         /// Страница с выполненными тасками
         GoRoute(
           path: Routes.done,
+          name: Routes.done,
           pageBuilder: (context, state) => NoTransitionPage(
-              child: ChangeNotifierProvider(
-            create: (context) => DonePageProvider(context: context),
-            builder: (context, child) => const DonePage(),
-          )),
+            child: ChangeNotifierProvider(
+              create: (context) => DonePageProvider(context: context),
+              child: const DonePage(),
+            ),
+          ),
         ),
 
         /// Страница с активными тасками
         GoRoute(
           path: Routes.active,
+          name: Routes.active,
           pageBuilder: (context, state) => NoTransitionPage(
             child: ChangeNotifierProvider(
               create: (context) => ActivePageProvider(context: context),
-              builder: (context, child) => const ActivePage(),
+              child: const ActivePage(),
             ),
           ),
         ),

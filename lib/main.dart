@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_accounting_assistant/routes/app_routes.dart';
 
 void main() => runApp(const App());
 
@@ -7,7 +8,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green.shade50,
