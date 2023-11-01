@@ -1,4 +1,4 @@
-import 'package:school_accounting_assistant/data/days/entity/doneD_day.dart';
+import 'package:school_accounting_assistant/data/days/entity/done_day.dart';
 
 class DoneDays {
   List<DoneDay> doneDays = [];
