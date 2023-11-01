@@ -24,7 +24,7 @@ final router = GoRouter(
       pageBuilder: (context, state) => NoTransitionPage(
         child: ChangeNotifierProvider(
           create: (context) => LoadingPageProvider(context: context),
-          builder: (context, child) => const LoadingPage(),
+          child: const LoadingPage(),
         ),
       ),
     ),
