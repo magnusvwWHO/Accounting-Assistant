@@ -1,3 +1,4 @@
+import 'package:accounting_assistant/data_classes/task_loader.dart';
 import 'package:accounting_assistant/pages/bottom_bar/bottom_bar_provider.dart';
 import 'package:accounting_assistant/pages/list_page/list_page.dart';
 import 'package:accounting_assistant/pages/list_page/list_page_provider.dart';
@@ -5,6 +6,7 @@ import 'package:accounting_assistant/pages/loading_page/loading_page.dart';
 import 'package:accounting_assistant/pages/loading_page/loading_page_provider.dart';
 import 'package:accounting_assistant/pages/task_page/task_page.dart';
 import 'package:accounting_assistant/pages/task_page/task_page_provider.dart';
+import 'package:accounting_assistant/router/pages_list.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,13 @@ final _shellNavigatorTaskKey =
 final router = GoRouter(
   navigatorKey: _rootNavigationKey,
   initialLocation: "/loading",
+  redirect: (context, state) {
+    if (!TaskLoader.isLoaded) {
+      return '/loading';
+    } else {
+      return state.path;
+    }
+  },
   routes: [
     GoRoute(
       name: 'loading',

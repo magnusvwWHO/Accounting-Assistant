@@ -6,6 +6,8 @@ import 'package:accounting_assistant/data_classes/day_tasks.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class TaskLoader {
+  static bool isLoaded = false;
+
   static Future<String?> initialize() async {
     return await downloadTasks();
   }
@@ -38,6 +40,7 @@ abstract class TaskLoader {
     } on FirebaseException catch (e) {
       return e.message;
     }
+    isLoaded = true;
     return '';
   }
 
